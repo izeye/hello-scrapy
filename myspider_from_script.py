@@ -14,11 +14,15 @@ class MySpider(scrapy.Spider):
             yield response.follow(next_page, self.parse)
 
 
-process = CrawlerProcess(settings={
-    "FEEDS": {
-        "items.json": {"format": "json"}
-    }
-})
+def crawl():
+    process = CrawlerProcess(settings={
+        "FEEDS": {
+            "items.json": {"format": "json"}
+        }
+    })
+    process.crawl(MySpider)
+    process.start()
 
-process.crawl(MySpider)
-process.start()
+
+crawl()
+crawl()
